@@ -8,7 +8,6 @@
 """
 
 import json
-from pathlib import Path
 
 import xlrd
 from faker import Faker

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tablefill"
-version = "0.1.0"
+version = "0.1.1"
 description = "Excel模板数据填充,快速应对Web项目数据导入"
 license= "MIT"
 authors = ["柒意 <396667207@qq.com>"]

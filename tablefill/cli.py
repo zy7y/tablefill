@@ -16,7 +16,7 @@ from typer import colors
 from typer import launch
 from typer import confirm
 
-from src import main
+from .src import main
 
 
 app = Typer(help="- Excel表格模板数据填充工具 -")
