@@ -1,0 +1,25 @@
+[
+  {
+    "type": "input",
+    "var": "这列我输入"
+  },
+  {
+    "func": "phone_number"
+  },
+  {
+    "func": "random_int",
+    "var": {
+      "min": 10,
+      "max": 21
+    },
+    "varFirst": "编号",
+    "varEnd": "班"
+  },
+  {
+    "func": "random_elements",
+    "var": {
+      "elements": ["小学", "高中", "初中"],
+      "length": 1
+    }
+  }
+]

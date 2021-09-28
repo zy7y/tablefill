@@ -8,14 +8,17 @@
 """
 
 import json
+from pathlib import Path
 
 import xlrd
 from faker import Faker
 from xlutils.copy import copy
 from typing import List, Dict
 
+fake = Faker("zh-Cn")
 
-def write_excel(score: str, data: List[str], path: str, sheet_index: int = 0):
+
+def write_excel(score: str, data: List[str], path: str, sheet_index: int):
     """
     追加写入excel
     :param score: 源文件地址
@@ -46,13 +49,15 @@ def generate_row(column_conf: List[Dict[str, str]], num: int = 10):
     for _ in range(num):
         row = []
         for column in column_conf:
-            if column["type"] == "faker":
+            if column.get("type", "faker") == "faker":
                 if parameter := column.get("var", False):
-                    result = getattr(Faker("zh-Cn"), column["func"])(**parameter)
+                    result = getattr(fake, column["func"])(**parameter)
                 else:
-                    result = getattr(Faker("zh-Cn"), column["func"])()
-            if column["type"] == "input":
+                    result = getattr(fake, column["func"])()
+            elif column["type"] == "input":
                 result = column.get("var", "")
+            else:
+                raise TypeError("type field must faker or input.")
 
             if (var_first := column.get("varFirst")) is not None:
                 result = var_first + str(result)
@@ -60,23 +65,39 @@ def generate_row(column_conf: List[Dict[str, str]], num: int = 10):
             if (var_end := column.get("varEnd")) is not None:
                 result += str(var_end)
 
-            row.append(str(result))
+            row.append(result)
         yield row
 
 
-def main(conf_path: str, score_file: str, generate_file: str, number: int = 10):
+def main(
+    conf_path: str,
+    score_file: str,
+    generate_file: str,
+    number: int = 10,
+    sheet_index: int = 0,
+):
     """
     主程序入口
     :param conf_path: 配置文件路径
     :param score_file: 源excel文件
     :param generate_file: 生成的文件
     :param number: 生成数据量
+    :param sheet_index: 写在第几个sheet页
     :return:
     """
-    with open(conf_path, encoding='utf-8') as f:
+    with open(conf_path, encoding="utf-8") as f:
         conf = json.loads(f.read())
-    write_excel(score_file, data=generate_row(conf, number), path=generate_file)
+    write_excel(
+        score_file,
+        data=generate_row(conf, number),
+        path=generate_file,
+        sheet_index=sheet_index,
+    )
 
+
+__all__ = [
+    "main"
+]
 
 if __name__ == "__main__":
-    main("jzg.json", "学生信息导入模板.xls", "jzg.xls")
+    main("../examples/demo.json", "../examples/demo.xlsx", "../examples/fakedemo.xls")
