@@ -16,10 +16,9 @@
     "varEnd": "班"
   },
   {
-    "func": "random_elements",
+    "func": "random_element",
     "var": {
-      "elements": ["小学", "高中", "初中"],
-      "length": 1
+      "elements": ["小学", "高中", "初中"]
     }
   }
 ]

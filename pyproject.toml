@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tablefill"
-version = "0.1.1"
+version = "0.1.2"
 description = "Excel模板数据填充,快速应对Web项目数据导入"
 license= "MIT"
 authors = ["柒意 <396667207@qq.com>"]
@@ -14,7 +14,7 @@ python = "^3.9"
 typer = "^0.4.0"
 xlrd = "1.2.0"
 Faker = "^8.14.0"
-xlutils = "^2.0.0"
+xlutils = "2.0.0"
 
 [tool.poetry.dev-dependencies]
 

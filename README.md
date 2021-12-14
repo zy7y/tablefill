@@ -1,5 +1,5 @@
 # 背景
-在测试Web后台管理系统项目时,导入数据是个高频出现的功能,[tablefill](https://github.com/zy7y/tablefill)主要完成根据配置文件对模板进行填充数据
+在测试Web后台管理系统项目时，导入数据是个高频出现的功能，[tablefill](https://github.com/zy7y/tablefill)主要完成根据配置文件对模板进行填充数据
 
 # 使用
 **安装**
@@ -18,6 +18,14 @@ pip install tablefill
   }
 ]
 ```
+**api参考[faker](https://faker.readthedocs.io/en/stable/providers.html)**
+phone_number: 生成手机号
+random_element: 列表中随机元素
+name: 随机名称
+ssn: 身份证号
+date: 随机日期
+
+
 *示例*
 ```json
 [
@@ -38,10 +46,9 @@ pip install tablefill
     "varEnd": "班"
   },
   {
-    "func": "random_elements",
+    "func": "random_element",
     "var": {
       "elements": ["小学", "高中", "初中"],
-      "length": 1
     }
   }
 ]

@@ -58,8 +58,11 @@ def generate_row(column_conf: List[Dict[str, str]], num: int = 10):
             else:
                 raise TypeError("type field must faker or input.")
 
+            if not isinstance(result, str):
+                result = str(result)
+
             if (var_first := column.get("varFirst")) is not None:
-                result = var_first + str(result)
+                result = str(var_first) + result
 
             if (var_end := column.get("varEnd")) is not None:
                 result += str(var_end)
@@ -99,4 +102,4 @@ __all__ = [
 ]
 
 if __name__ == "__main__":
-    main("../examples/demo.json", "../examples/demo.xlsx", "../examples/fakedemo.xls")
+    main("../examples/demo.json", "../examples/demo.xlsx", "../examples/tablefill.xls")
