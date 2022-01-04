@@ -11,8 +11,6 @@ from typing import Optional
 
 from typer import Typer
 from typer import echo
-from typer import style
-from typer import colors
 from typer import launch
 from typer import confirm
 
@@ -30,7 +28,7 @@ def visit_docs():
     """
     visit = confirm("即将访问tablefill文档，确认?")
     if visit:
-        launch("https://gitee.com/zy7y")
+        launch("https://gitee.com/zy7y/tablefill.git")
 
 
 @app.command()
@@ -51,9 +49,9 @@ def files(path: Path, suffix: Optional[str] = ".json"):
 
 @app.command()
 def generate(
-    config: Path,
-    template: Path,
-    file: Path,
+    config: str,
+    template: str,
+    file: str,
     num: Optional[int] = 10,
     index: Optional[int] = 0,
 ):
@@ -67,7 +65,6 @@ def generate(
     :return:
     """
     main(config, template, file, num, index)
-    echo(style(f"装填完毕,欢迎下次光临~：{file}", fg=colors.GREEN))
 
 
 if __name__ == "__main__":
